@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+
+
+</head>
+
+<body>
+    <div ng-app="" ng-init="singleprice=50;doubleprice=100;masterprice=500;singledays=0;doubledays=0;master=0" ng-controller="myCtrl">
+        <h1>Holiday Inn</h1>
+
+        <h2>Single Room</h2>
+        No. of days:
+        <input type="number" ng-model="singledays"> &nbsp; Price: $50
+        <br> Single Room Total: ${{singledays*singleprice}}
+
+        <h2>Double Room</h2>
+        No. of days:
+        <input type="number" ng-model="doubledays"> &nbsp; Price: $100
+        <br> Double Room Total: ${{doubledays*doubleprice}}
+
+        <h2>Master Suite</h2>
+        No. of days:
+        <input type="number" ng-model="master"> &nbsp; Price: $500
+        <br> Master Suite Total: ${{master*masterprice}}
+
+
+        <h3>
+            Grand Total: ${{(singledays*singleprice) + (doubledays*doubleprice) + (master*masterprice)}}
+        </h3>
+
+    </div>
+
+    <h3>Contact Details</h3>
+    <form ng-app="" name="myForm">
+        Email:
+        <input type="email" name="myAddress" ng-model="text">
+        <span ng-show="myForm.myAddress.$error.email">
+            Not a valid e-mail address
+        </span>
+        <br> Phone:
+        <input type="number" class="form-control" ng-minlength="10" ng-maxlength="10" id="inputPhone" name="phone"
+            placeholder="Phone" ng-model="user.phone" ng-required="true">
+        <span class="help-block" ng-show="myForm.phone.$error.number"> Valid phone number is required </span>
+        <span class="help-block" ng-show="((myForm.phone.$error.minlength || myForm.phone.$error.maxlength) && myForm.phone.$dirty) ">
+        phone number should be 10 digits </span>
+
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.controller('myCtrl', function ($scope) {
+            $scope.showMe = false;
+            $scope.myFunc = function () {
+                $scope.showMe = !$scope.showMe;
+            }
+        });
+
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when("/", {
+                    templateUrl: "Main.htm"
+                })
+                .when("/HolidayInn", {
+                    templateUrl: "HolidayInn.htm"
+                })
+                .when("/Mariott", {
+                    templateUrl: "Mariott.htm"
+                })
+                .when("/Motel86", {
+                    templateUrl: "Motel86.htm"
+                });
+        });
+    </script>
+</head>
+
+<body ng-app="myApp" ng-init="hotels=[{hotel:'Motel86',location:'San Jose'},
+                                {hotel:'Mariott',location:'Raleigh'},
+                                {hotel:'HolidayInn',location:'Los Angeles'}]" ng-controller="myCtrl">
+
+    <header class="w3-container w3-light-grey w3-padding-16">
+        <h3>Welcome to Ashraya!</h3>
+        <p>Ashraya is the number one hotel room fare estimation single page application implemented in AngularJS</p>
+    </header>
+
+    <p>
+        <a href="#/!">Home</a>
+    </p>
+    <br>
+    <button ng-click="myFunc()">Click here to see our great options!</button>
+    <br>
+
+
+    <div ng-show="showMe">
+        <br>
+
+        <br>
+        <table border='1'>
+            <tr>
+                <th>Hotel</th>
+                <th>Location</th>
+            </tr>
+            <tr ng-repeat="x in hotels | orderBy: 'location'">
+                <td>
+                    <a ng-href="#!{{x.hotel}}">{{x.hotel}}</a>
+                </td>
+                <td> {{x.location}} </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <div ng-view></div>
+</body>
+
+</html>
